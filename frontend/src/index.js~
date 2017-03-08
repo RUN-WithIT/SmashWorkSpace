@@ -1,0 +1,31 @@
+require('../node_modules/bootstrap/dist/css/bootstrap.min.css');
+require('../node_modules/blockly/styles/blockly-demo.css');
+require('./style/pretty.css');
+
+// require('../node_modules/blockly/blockly_compressed.js');
+// require('../node_modules/blockly/blocks_compressed.js');
+// require('../node_modules/blockly/msg/js/en.js');
+// require('../node_modules/blockly/bash_compressed.js');
+// require('../node_modules/blockly-smash/smash_compressed.js');
+
+let m = require('mithril');
+let workSpace = require('./views/workspace');
+let nav = require('./views/nav');
+
+
+
+let App = {
+    view: function() {
+        return m('div',{
+            style: 'height:100%'
+        }, [
+            m(nav),
+            m(workSpace)
+        ]);
+    }
+};
+
+
+m.route(document.body, '/', {
+    '/': App
+});

@@ -1,0 +1,8 @@
+pre.prettyprint {
+    font-size: 12px;
+    width: 89%;
+    height: 100%;
+    position: absolute;
+    border-color: #c6c6c6;
+    border-width: 1px;
+}

@@ -1,0 +1,13 @@
+let Bullet = require('bullet-pubsub');
+
+const Events = {
+    
+};
+
+let bus = {
+    on: function(cb) {
+        Bullet.on(
+    }
+}
+
+module.exports = bus;

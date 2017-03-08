@@ -1,0 +1,41 @@
+let m = require('mithril');
+let toolbox = require('./toolbox');
+let smBlockly = require('../smBlockly');
+
+let state = {
+    code: '',
+    updatePreview: function() {
+        state.code = Blockly.bash.workspaceToCode(smBlockly.workspace);
+        m.redraw();
+        prettyPrint();
+    }
+}
+
+let workspace = {
+    oncreate: function(vnode) {
+        smBlockly.init('blocklyDiv');
+        smBlockly.workspace.addChangeListener(state.updatePreview);
+    },
+    view: function() {
+        return m('div', {
+            id: 'blocklyArea',
+            class: 'row',
+            style: 'height:100%'
+        }, [m('div', {
+                id: 'blocklyDiv',
+                class: 'col-8'
+            }),
+            m('div', {
+                class: 'col'
+            }, [
+                m('pre', {
+                    id: 'previewDiv',
+                    class: 'prettyprint but-not-that-pretty'                  ,
+                    style: 'width:100%;height:100%;position:absolute'
+                }, state.code)
+            ]),
+            m(toolbox)
+        ]);
+    }
+};
+module.exports = workspace;

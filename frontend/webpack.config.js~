@@ -1,0 +1,25 @@
+module.exports = {
+    entry: './src/index.js',
+    output: {
+        path: './bin',
+        filename: 'app.js'
+    },
+    module: {
+        rules: [{
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader']
+        }, {
+            test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+            use: 'url-loader?limit=10000',
+        }, {
+            test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
+            use: 'file-loader',
+        }, {
+            test: /bootstrap\/dist\/js\/umd\//,
+            use: 'imports-loader?jQuery=jquery'
+        }, {
+            test: /(blockly|blockly\-smash)\/.js$/,
+            use: ['script-loader']
+        }],
+    }
+};

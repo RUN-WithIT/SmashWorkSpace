@@ -1,0 +1,26 @@
+let m = require('mithril');
+let conf = require('./config');
+
+let smBlockly = {
+    workspace:null,
+    Blockly: Blockly,
+    init: function(id) {
+        this.workspace = Blockly.inject('blocklyDiv', {
+            toolbox: document.getElementById('toolbox')
+        });
+    },
+    saveBlocks: function() {
+
+        let xml = smBlockly.Blockly.Xml.workspaceToDom(this.workspace);
+        m.request({
+            method: "POST",
+            url: `${conf.url}/`,
+            data: {
+                xml: xml
+            }
+        })
+    }
+};
+
+
+module.exports = smBlockly;

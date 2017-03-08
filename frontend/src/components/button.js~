@@ -1,0 +1,20 @@
+let m = require('mithril');
+
+let button = {
+    oninit: function(vnode) {
+        this.text = vnode.attrs.text;
+        this.onclick = vnode.attrs.onclick;
+    },
+    view: function() {
+        return m('button', {
+            class: 'btn btn-primary btn-sm',
+            style: 'margin:5px',
+            type: 'button',
+            onclick: this.onclick
+        }, this.text)
+    }
+
+}
+
+
+module.exports = button;

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    </head>
+    <body style="height:100vh">
+
+      <script type="text/javascript" src="../node_modules/blockly/blockly_compressed.js"></script>
+      <script type="text/javascript" src="../node_modules/blockly/blocks_compressed.js"></script>
+      <script type="text/javascript" src="../node_modules/blockly/msg/js/en.js"></script>
+      <script type="text/javascript" src="../node_modules/blockly/demos/prettify.js"></script>
+      <script type="text/javascript" src="../node_modules/blockly/bash_compressed.js"></script>
+      <script type="text/javascript" src="../node_modules/blockly-smash/smash_compressed.js"></script>
+      <script type="text/javascript" src="bin/app.js" charset="utf-8"></script>
+    </body>
+</html>
