@@ -42,7 +42,8 @@ let smBlockly = {
         let data = `data:text/plain;charset=utf-8,${script}`
 
         let download = document.createElement('a');
-        download.href = data;
+        let blob = new Blob([script], {type:'text/plain'});
+        download.href = window.URL.createObjectURL(blob);
         download.download = 'script.sh';
 
         download.click();
