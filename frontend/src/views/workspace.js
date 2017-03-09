@@ -33,9 +33,7 @@ let workspace = {
     },
     view: function() {
         return m('div', {
-            id: 'blocklyArea',
-            class: 'row',
-            style: 'height:100%'
+            class: 'row blockly-area',
         }, [m('div', {
                 id: 'blocklyDiv',
                 class: 'col-8'

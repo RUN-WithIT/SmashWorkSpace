@@ -9,7 +9,7 @@ let button = {
             type: 'button',
             onclick: vnode.attrs.onclick
 
-        }, vnode.attrs.text)
+        }, [vnode.attrs.text, vnode.children])
     }
 }
 

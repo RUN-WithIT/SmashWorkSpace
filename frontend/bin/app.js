@@ -3109,15 +3109,29 @@ let smBlockly = {
 
     },
     importBlocks: function() {
+        let upload = document.createElement('input');
+        upload.type = 'file';
+        upload.onchange = function() {
+            let file = upload.files[0];
+            let reader = new FileReader()
 
+            reader.onload = function() {
+                let xml = smBlockly.Blockly.Xml.textToDom(this.result);
+                smBlockly.Blockly.Xml.domToWorkspace(xml, smBlockly.workspace);
+            }
+            reader.readAsBinaryString(file)
+        }
+        upload.click();
     },
     exportScripts: function() {
         let script = smBlockly.Blockly.bash.workspaceToCode(smBlockly.workspace);
-        
+
         let data = `data:text/plain;charset=utf-8,${script}`
 
         let download = document.createElement('a');
-        let blob = new Blob([script], {type:'text/plain'});
+        let blob = new Blob([script], {
+            type: 'text/plain'
+        });
         download.href = window.URL.createObjectURL(blob);
         download.download = 'script.sh';
 
@@ -3246,10 +3260,15 @@ let nav = {
                         text: 'save scripts',
                         onclick: smBlockly.saveScripts
                     }),
-                    m(button, {
+                    m(button,{
                         text: 'import blocks',
                         onclick: smBlockly.importBlocks
-                    }),
+                    }, [
+                        // m('input', {
+                        // type: 'file',
+                        // class: 'button-upload'
+                        // })
+                    ]),
                     m(button, {
                         text: 'export blocks',
                         id: 'export-blocks',
@@ -3308,9 +3327,7 @@ let workspace = {
     },
     view: function() {
         return m('div', {
-            id: 'blocklyArea',
-            class: 'row',
-            style: 'height:100%'
+            class: 'row blockly-area',
         }, [m('div', {
                 id: 'blocklyDiv',
                 class: 'col-8'
@@ -3738,7 +3755,7 @@ exports = module.exports = __webpack_require__(2)();
 
 
 // module
-exports.push([module.i, "pre.prettyprint {\n    font-size: 12px;\n    width: 89%;\n    height: 100%;\n    position: absolute;\n    border-color: #c6c6c6;\n    border-width: 1px;\n}\n", ""]);
+exports.push([module.i, "pre.prettyprint {\n    font-size: 12px;\n    width: 89%;\n    height: 100%;\n    position: absolute;\n    border-color: #c6c6c6;\n    border-width: 1px;\n}\n\n\n.app-container {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n}\n\n.workspace-container {\n    height: 92%\n}\n.blockly-area {\n   height: 100%\n}\n\n\n.button-upload {\n    opacity:0;\n}\n", ""]);
 
 // exports
 
@@ -4542,7 +4559,7 @@ let button = {
             type: 'button',
             onclick: vnode.attrs.onclick
 
-        }, vnode.attrs.text)
+        }, [vnode.attrs.text, vnode.children])
     }
 }
 
@@ -5075,12 +5092,11 @@ let nav = __webpack_require__(9);
 let App = {
     view: function() {
         return m('div', {
-            style: 'height:93%'
+            class: 'app-container'
         }, [
             m(nav),
             m('div', {
-                class: 'container-fluid',
-                style: 'height:99%;'
+                class: 'container-fluid workspace-container'
             }, [
                 m(workSpace)
             ])

@@ -34,15 +34,29 @@ let smBlockly = {
 
     },
     importBlocks: function() {
+        let upload = document.createElement('input');
+        upload.type = 'file';
+        upload.onchange = function() {
+            let file = upload.files[0];
+            let reader = new FileReader()
 
+            reader.onload = function() {
+                let xml = smBlockly.Blockly.Xml.textToDom(this.result);
+                smBlockly.Blockly.Xml.domToWorkspace(xml, smBlockly.workspace);
+            }
+            reader.readAsBinaryString(file)
+        }
+        upload.click();
     },
     exportScripts: function() {
         let script = smBlockly.Blockly.bash.workspaceToCode(smBlockly.workspace);
-        
+
         let data = `data:text/plain;charset=utf-8,${script}`
 
         let download = document.createElement('a');
-        let blob = new Blob([script], {type:'text/plain'});
+        let blob = new Blob([script], {
+            type: 'text/plain'
+        });
         download.href = window.URL.createObjectURL(blob);
         download.download = 'script.sh';
 

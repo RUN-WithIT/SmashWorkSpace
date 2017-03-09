@@ -6,3 +6,24 @@ pre.prettyprint {
     border-color: #c6c6c6;
     border-width: 1px;
 }
+
+
+.app-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.workspace-container {
+    height: 92%
+}
+.blockly-area {
+   height: 100%
+}
+
+
+.button-upload {
+    opacity:0;
+}

@@ -10,12 +10,11 @@ let nav = require('./views/nav');
 let App = {
     view: function() {
         return m('div', {
-            style: 'height:93%'
+            class: 'app-container'
         }, [
             m(nav),
             m('div', {
-                class: 'container-fluid',
-                style: 'height:99%;'
+                class: 'container-fluid workspace-container'
             }, [
                 m(workSpace)
             ])

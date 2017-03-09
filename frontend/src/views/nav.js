@@ -33,10 +33,15 @@ let nav = {
                         text: 'save scripts',
                         onclick: smBlockly.saveScripts
                     }),
-                    m(button, {
+                    m(button,{
                         text: 'import blocks',
                         onclick: smBlockly.importBlocks
-                    }),
+                    }, [
+                        // m('input', {
+                        // type: 'file',
+                        // class: 'button-upload'
+                        // })
+                    ]),
                     m(button, {
                         text: 'export blocks',
                         id: 'export-blocks',
