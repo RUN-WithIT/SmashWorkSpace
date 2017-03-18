@@ -19,7 +19,7 @@ module.exports = {
             use: 'imports-loader?jQuery=jquery'
         }, {
             test: require.resolve('./node_modules/blockly/blockly_compressed.js'),
-            use: 'exports-loader?Blockly'
+            use: ['imports-loader?this=>window','exports-loader?Blockly']
         },
                 {
             test: require.resolve('./node_modules/blockly/blocks_compressed.js'),
