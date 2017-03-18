@@ -15,13 +15,17 @@ let state = {
 let preview = {
     onupdate: function(vnode) {
         vnode.dom.classList.remove('prettyprinted');
+        while (vnode.dom.firstChild) {
+            vnode.dom.removeChild(vnode.dom.firstChild);
+        }
+        vnode.dom.innerText = state.code;
         prettyPrint();
     },
     view: function() {
         return m('pre', {
             id: 'previewDiv',
             class: 'prettyprint',
-        }, state.code);
+        });
     }
 }
 
