@@ -45,7 +45,7 @@ let workspace = {
             m('div', {
                 class: 'col'
             }, [m(preview)]),
-            m(toolbox)
+            m(toolbox.scriptToolbox)
         ]);
     }
 };

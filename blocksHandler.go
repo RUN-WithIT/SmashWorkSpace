@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 )
 
+
 func get(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 
@@ -31,9 +32,9 @@ func post(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Println(block)
 	if id, ok := params["id"]; ok {
-		fmt.Println(id)	
+		fmt.Println("block id: ", id)	
 	} else {
-
+		fmt.Println("No id")
 	}
 }
 

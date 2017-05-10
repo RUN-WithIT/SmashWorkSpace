@@ -1,9 +1,9 @@
-let m = require('mithril');
+qlet m = require('mithril');
 
-let toolbox = {
+let scriptToolbox = {
     view: function() {
         return [
-            m("xml[id='toolbox']", {
+            m("xml[id='script-toolbox']", {
                 style: {
                     "display": "none"
                 }
@@ -23,7 +23,7 @@ let toolbox = {
                     m("block[type='reaction_add']"),
                     m("block[type='reaction_do']"),
                     m("block[type='reaction_remove']"),
-                    m("block[type='blaster']")
+                    m("block[type='blaster']"),
                 ]),
                 m("category[colour='120'][id='catLoops'][name='Loops']", [
                     m("block[type='controls_repeat_ext']",
@@ -396,7 +396,7 @@ let toolbox = {
                 m("category[colour='330'][custom='VARIABLE'][id='catVariables'][name='Variables']"),
                 m("category[colour='290'][custom='PROCEDURE'][id='catFunctions'][name='Functions']")
             ]),
-            m("xml[id='blocklyDefault']", {
+            ("xml[id='blocklyDefault']", {
                     style: {
                         "display": "none"
                     }
@@ -486,4 +486,43 @@ let toolbox = {
 
 }
 
-module.exports = toolbox;
+
+
+
+let configToolbox = {
+    view: function() {
+        return [
+            m("xml[id='config-toolbox']", {
+                style: {
+                    "display": "none"
+                }
+            }, [
+                m("category[colour='230'][id='smash'][name='Smash']", [
+                    m("block[type='reaction_json'"),
+                    m("block[type='reaction_action_json'")
+                ]),
+                m("category[colour='160'][id='catText'][name='Text']", [
+                    m("block[type='text']")
+                ]),
+                m("category[colour='260'][id='catLists'][name='Lists']", [
+                    m("block[type='lists_create_with']",
+                        m("mutation[items='0']")
+                    ),
+                    m("block[type='lists_create_with']")
+                ])
+
+            ])
+        ]
+    }
+};
+
+
+
+
+
+
+
+
+
+module.exports.scriptToolbox = scriptToolbox;
+module.exports.configToolbox = configToolbox;

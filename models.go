@@ -1,0 +1,6 @@
+package main
+
+type Block struct {
+	id int
+	xml string
+}

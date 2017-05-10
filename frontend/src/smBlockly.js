@@ -13,12 +13,19 @@ let smBlockly = {
     Blockly: Blockly,
     init: function(id) {
         this.workspace = Blockly.inject('blocklyDiv', {
-            toolbox: document.getElementById('toolbox')
+            toolbox: document.getElementById('script-toolbox')
         });
     },
     saveBlocks: function() {
         let xml = smBlockly.Blockly.Xml.workspaceToDom(smBlockly.workspace);
+        xml = smBlockly.Blockly.Xml.domToText(xml);
         return api.block.post(0, xml);
+    },
+    saveScripts: function() {
+        let script = smBlockly.Blockly.bash.workspaceToCode(smBlockly.workspace);
+
+        let data = `data:text/plain;charset=utf-8,${script}`
+        return api.script.post(0, data);
     },
     exportBlocks: function(e) {
         let xml = smBlockly.Blockly.Xml.workspaceToDom(smBlockly.workspace);
@@ -30,8 +37,6 @@ let smBlockly = {
         download.download = 'blocks.xml';
 
         download.click();
-
-
     },
     importBlocks: function() {
         let upload = document.createElement('input');

@@ -8,7 +8,7 @@ let block = {
     post: function(id, xml) {
         return m.request({
             method: "POST",
-            url: `${conf.url}/block/`,
+            url: `${conf.url}/block/${id}`,
             data: {
                 id: id,
                 xml: xml

@@ -3,6 +3,32 @@ let smBlockly = require('../smBlockly');
 let button = require('../components/button');
 
 
+let fileDropdownMenu = m('div', {
+    class: 'dropdown-menu'
+}, [
+    m('a', {
+        class: 'dropdown-item',
+        onclick: smBlockly.saveBlocks
+    }, 'Save block'),
+    m('a', {
+        class: 'dropdown-item',
+        onclick: smBlockly.saveScripts
+    }, 'save scripts'),
+    m('a', {
+        class: 'dropdown-item',
+        onclick: smBlockly.importBlocks
+    }, 'Import Blocks'),
+    m('a', {
+        class: 'dropdown-item',
+        onclick: smBlockly.exportBlocks
+    }, 'Export Blocks'),
+    m('a', {
+        class: 'dropdown-item',
+        onclick: smBlockly.exportScripts
+    }, 'Export Scripts')
+]);
+
+
 let nav = {
     view: function() {
         return m('nav', {
@@ -14,7 +40,7 @@ let nav = {
             }, [
                 m('img', {
                     class: 'd-inline-block align-top',
-                    src: '../assets/logo_text.png',
+                    src: 'bin/assets/logo_text.png',
                     height: '30px',
                     alt: 'Run-WithIt'
                 })
@@ -22,40 +48,37 @@ let nav = {
             m('div', {
                 class: 'collapse navbar-collapse'
             }, [
-                m('form', {
-                    class: 'form-inline'
+                m('ul', {
+                    class: 'navbar-nav'
                 }, [
-                    m(button, {
-                        text: 'save blocks',
-                        onclick: smBlockly.saveBlocks
-                    }),
-                    m(button, {
-                        text: 'save scripts',
-                        onclick: smBlockly.saveScripts
-                    }),
-                    m(button,{
-                        text: 'import blocks',
-                        onclick: smBlockly.importBlocks
+                    m('li', {
+                        class: 'nav-item'
                     }, [
-                        // m('input', {
-                        // type: 'file',
-                        // class: 'button-upload'
-                        // })
+                        m('a', {
+                            class: 'nav-link'
+                        }, 'Script')
                     ]),
-                    m(button, {
-                        text: 'export blocks',
-                        id: 'export-blocks',
-                        onclick: smBlockly.exportBlocks
-                    }),
-                    m(button, {
-                        text: 'export scripts',
-                        onclick: smBlockly.exportScripts
-                    })
+                    m('li', {
+                        class: 'nav-item'
+                    }, [
+                        m('a', {
+                            class: 'nav-link'
+                        }, 'Config')
+                    ]),
+                    m('li', {
+                        class: 'nav-item dropdown'
+                    }, [
+                        m('a', {
+                            class: 'nav-link dropdown-toggle',
+                            'data-toggle': 'dropdown'
+                        }, 'File'),
+                        fileDropdownMenu
+                    ])
                 ])
             ])
         ]);
     }
-}
+};
 
 
 module.exports = nav;
