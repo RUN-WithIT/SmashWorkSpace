@@ -8,13 +8,55 @@ require('../node_modules/blockly/bash_compressed.js');
 require('../node_modules/blockly-smash/smash_compressed.js');
 
 
+
+
+
 let smBlockly = {
     workspace: null,
     Blockly: Blockly,
-    init: function(id) {
+    mode: 'config',
+    init: function() {
         this.workspace = Blockly.inject('blocklyDiv', {
-            toolbox: document.getElementById('script-toolbox')
+            toolbox: document.getElementById(this.mode + '-toolbox')
         });
+    },
+    toggleScript: function() {
+        console.log('toggle script');
+        this.saveBlocksLocal();
+        this.mode = 'script';
+        this.workspace.updateToolbox(document.getElementById(this.mode + '-toolbox'));
+        this.loadBlocksLocal();
+    },
+    toggleConfig: function() {
+        console.log('toggle config');
+        this.saveBlocksLocal();
+        this.mode = 'config';
+        this.workspace.updateToolbox(document.getElementById(this.mode + '-toolbox'));
+        this.loadBlocksLocal();
+    },
+    getCode: function() {
+        let lang;
+        switch (this.mode) {
+        case 'config':
+            lang = 'json';
+            break;
+        case 'script':
+            lang = 'bash';
+            break;
+        }
+        
+        return this.Blockly[lang].workspaceToCode(this.workspace);
+    },
+    saveBlocksLocal: function() {
+        let xml = smBlockly.Blockly.Xml.workspaceToDom(smBlockly.workspace);
+        xml = smBlockly.Blockly.Xml.domToText(xml);
+        localStorage.setItem(this.mode, xml);
+        this.workspace.clear();
+    },
+    loadBlocksLocal: function() {
+        let xml = localStorage.getItem(this.mode);
+        let dom = smBlockly.Blockly.Xml.textToDom(xml);
+        smBlockly.Blockly.Xml.domToWorkspace(dom, smBlockly.workspace);
     },
     saveBlocks: function() {
         let xml = smBlockly.Blockly.Xml.workspaceToDom(smBlockly.workspace);
@@ -22,7 +64,7 @@ let smBlockly = {
         return api.block.post(0, xml);
     },
     saveScripts: function() {
-        let script = smBlockly.Blockly.bash.workspaceToCode(smBlockly.workspace);
+        let script = smBlockly.getCode();
 
         let data = `data:text/plain;charset=utf-8,${script}`
         return api.script.post(0, data);
@@ -54,7 +96,7 @@ let smBlockly = {
         upload.click();
     },
     exportScripts: function() {
-        let script = smBlockly.Blockly.bash.workspaceToCode(smBlockly.workspace);
+        let script = smBlockly.getCode();
 
         let data = `data:text/plain;charset=utf-8,${script}`
 
@@ -66,7 +108,18 @@ let smBlockly = {
         download.download = 'script.sh';
 
         download.click();
+    },
+
+
+
+
+
+    //internal
+
+    _setWorkspace: function(toolBox) {
+       
     }
+
 };
 
 

@@ -55,14 +55,16 @@ let nav = {
                         class: 'nav-item'
                     }, [
                         m('a', {
-                            class: 'nav-link'
+                            class: 'nav-link',
+                            onclick: smBlockly.toggleScript.bind(smBlockly)
                         }, 'Script')
                     ]),
                     m('li', {
                         class: 'nav-item'
                     }, [
                         m('a', {
-                            class: 'nav-link'
+                            class: 'nav-link',
+                            onclick: smBlockly.toggleConfig.bind(smBlockly)
                         }, 'Config')
                     ]),
                     m('li', {

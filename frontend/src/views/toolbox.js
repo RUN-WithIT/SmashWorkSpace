@@ -1,4 +1,4 @@
-qlet m = require('mithril');
+let m = require('mithril');
 
 let scriptToolbox = {
     view: function() {
@@ -8,7 +8,7 @@ let scriptToolbox = {
                     "display": "none"
                 }
             }, [
-                m("category[colour='210'][id='catLogic'][name='Logic']", [
+                m("Scategory[colour='210'][id='catLogic'][name='Logic']", [
                     m("block[type='controls_if']"),
                     m("block[type='logic_compare']"),
                     m("block[type='logic_operation']"),
@@ -395,97 +395,10 @@ let scriptToolbox = {
                 m("sep"),
                 m("category[colour='330'][custom='VARIABLE'][id='catVariables'][name='Variables']"),
                 m("category[colour='290'][custom='PROCEDURE'][id='catFunctions'][name='Functions']")
-            ]),
-            ("xml[id='blocklyDefault']", {
-                    style: {
-                        "display": "none"
-                    }
-                },
-                m("block[type='variables_set']", [
-                    m("field[name='VAR']",
-                        "Count"
-                    ),
-                    m("value[name='VALUE']",
-                        m("block[type='math_number']",
-                            m("field[name='NUM']",
-                                "1"
-                            )
-                        )
-                    ),
-                    m("next",
-                        m("block[type='controls_whileUntil'][x='16'][y='16']", [
-                            m("field[name='MODE']",
-                                "WHILE"
-                            ),
-                            m("value[name='BOOL']",
-                                m("block[type='logic_compare']", [
-                                    m("field[name='OP']",
-                                        "LTE"
-                                    ),
-                                    m("value[name='A']",
-                                        m("block[type='variables_get']",
-                                            m("field[name='VAR']",
-                                                "Count"
-                                            )
-                                        )
-                                    ),
-                                    m("value[name='B']",
-                                        m("block[type='math_number']",
-                                            m("field[name='NUM']",
-                                                "3"
-                                            )
-                                        )
-                                    )
-                                ])
-                            ),
-                            m("statement[name='DO']",
-                                m("block[type='text_print']", [
-                                    m("value[name='TEXT']",
-                                        m("block[type='text']",
-                                            m("field[name='TEXT']",
-                                                "Hello World!"
-                                            )
-                                        )
-                                    ),
-                                    m("next",
-                                        m("block[type='variables_set']", [
-                                            m("field[name='VAR']",
-                                                "Count"
-                                            ),
-                                            m("value[name='VALUE']",
-                                                m("block[type='math_arithmetic']", [
-                                                    m("field[name='OP']",
-                                                        "ADD"
-                                                    ),
-                                                    m("value[name='A']",
-                                                        m("block[type='variables_get']",
-                                                            m("field[name='VAR']",
-                                                                "Count"
-                                                            )
-                                                        )
-                                                    ),
-                                                    m("value[name='B']",
-                                                        m("block[type='math_number']",
-                                                            m("field[name='NUM']",
-                                                                "1"
-                                                            )
-                                                        )
-                                                    )
-                                                ])
-                                            )
-                                        ])
-                                    )
-                                ])
-                            )
-                        ])
-                    )
-                ])
-            )
-        ]
+            ])
+        ];
     }
-
 }
-
 
 
 
@@ -498,8 +411,8 @@ let configToolbox = {
                 }
             }, [
                 m("category[colour='230'][id='smash'][name='Smash']", [
-                    m("block[type='reaction_json'"),
-                    m("block[type='reaction_action_json'")
+                    m("block[type='reaction_json']"),
+                    m("block[type='reaction_action_json']")
                 ]),
                 m("category[colour='160'][id='catText'][name='Text']", [
                     m("block[type='text']")
@@ -512,7 +425,7 @@ let configToolbox = {
                 ])
 
             ])
-        ]
+        ];
     }
 };
 

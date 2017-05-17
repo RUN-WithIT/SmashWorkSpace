@@ -7,7 +7,7 @@ let prettyPrint = require('../../node_modules/blockly/demos/prettify.js');
 let state = {
     code: '',
     updatePreview: function() {
-        state.code = smBlockly.Blockly.bash.workspaceToCode(smBlockly.workspace);
+        state.code = smBlockly.getCode();
         m.redraw();
     }
 }
@@ -32,7 +32,10 @@ let preview = {
 
 let workspace = {
     oncreate: function(vnode) {
-        smBlockly.init('blocklyDiv');
+        smBlockly.init();
+        smBlockly.workspace.addChangeListener(state.updatePreview);
+    },
+    onupdate: function(vnode) {
         smBlockly.workspace.addChangeListener(state.updatePreview);
     },
     view: function() {
@@ -45,7 +48,8 @@ let workspace = {
             m('div', {
                 class: 'col'
             }, [m(preview)]),
-            m(toolbox.scriptToolbox)
+            m(toolbox.scriptToolbox),
+            m(toolbox.configToolbox)
         ]);
     }
 };
